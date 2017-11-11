@@ -8,23 +8,21 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-youTube.setKey('AIzaSyC5bwEuaf6FmJQGeQps5daPrY_3yg8Y2dc');
 
-
-var word = 'macbook';
-var limit = 5;
-
-youTube.addParam('order', 'relevance');
-// youTube.addParam('safeSearch', 'strict');
-// youTube.addParam('videoDuration', 'long');
-youTube.addParam('videoCategoryId', '27');
-youTube.addParam('regionCode', 'KR');
-youTube.addParam('type', 'video');
-youTube.addParam('videoCaption','closedCaption');
 
 var server = app.listen(3000, function(req,res){
     console.log("Express server has started on port 3000");
 });
+
+youTube.setKey('AIzaSyC5bwEuaf6FmJQGeQps5daPrY_3yg8Y2dc');
+
+var word = 'hello';
+var limit = 5;
+youTube.addParam('type', 'video');
+youTube.addParam('order', 'relevance');
+youTube.addParam('videoCategoryId', '10');
+youTube.addParam('regionCode', 'KR');
+youTube.addParam('videoCaption','closedCaption');
 
 
 
@@ -33,8 +31,6 @@ app.get('/',function(req,res){
 });
 app.get('/results',function(req,res){
   youTube.search(word, limit, function(err, result){
-      // youTube.clearParams();
-      // youTube.clearParts();
       if (err){
         console.log(err);
         return;
@@ -53,10 +49,6 @@ app.get('/results',function(req,res){
         console.log("URL: " + url);
         console.log("--------");
       }
-      res.render('results',{
-          items:result['items'],
-          title: items[i]['snippet']['title'],
-
-      });
+      res.render('results');
     });
 });
