@@ -11,7 +11,6 @@ app.engine('html', require('ejs').renderFile);
 youTube.setKey('AIzaSyC5bwEuaf6FmJQGeQps5daPrY_3yg8Y2dc');
 
 
-
 var word = 'macbook';
 var limit = 5;
 
@@ -28,9 +27,6 @@ var server = app.listen(3000, function(req,res){
 });
 
 
-
-
-// console.log(JSON.stringify(newdata,null ,2));
 
 app.get('/',function(req,res){
   res.render('search');
@@ -58,21 +54,9 @@ app.get('/results',function(req,res){
         console.log("--------");
       }
       res.render('results',{
-          items: items,
-          vidTitle: item['snippet']['title'],
+          items:result['items'],
+          title: items[i]['snippet']['title'],
+
       });
     });
 });
-// res.end(ejs.render(data,{
-//   // var items = result['items'];
-//   // for (var i in items){
-//   //   var item = items[i];
-//   //   var title = item['snippet']['title'];
-//   //   var videoID = item['id']['videoId'];
-//   //
-//   //   // var url = "https://www.youtube.com/watch?v=" + videoID;
-//   //   // console.log("title: " + title);
-//   //   // console.log("URL: " + url);
-//   //   // console.log("--------");
-//   // }
-// }));
