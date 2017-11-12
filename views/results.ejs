@@ -13,10 +13,12 @@
         <ul>
             <% for(var i in items){ %>
                 <li>
-                    <%=items[i]['snippet']['title']%>
-                </li>
-                <li>
-                    <%='https://www.youtube.com/watch?v='+items[i]['id']['videoId']%>
+                    <%=newdata['items'][i]['snippet']['title']%>
+                    <br/>
+                    <a href="<%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>">
+                      <%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>
+                    </a>
+
                 </li>
             <% } %>
         </ul>
