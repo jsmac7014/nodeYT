@@ -31,10 +31,9 @@ app.get('/',function(req,res){
 });
 app.post('/',function(req,res){
     word = req.body.searchbar;
-    res.redirect('/results/');
+    res.redirect('/results/' + word);
 });
-app.get('/results/',function(req,res){
-  console.log(word);
+app.get('/results/:word',function(req,res){
   youTube.search(word, limit, function(err, result){
       if (err){
         console.log(err);
