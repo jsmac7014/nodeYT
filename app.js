@@ -17,7 +17,7 @@ var server = app.listen(3000, function(req,res){
 
 youTube.setKey('AIzaSyC5bwEuaf6FmJQGeQps5daPrY_3yg8Y2dc');
 
-var word = '';
+var word;
 var limit = 10;
 youTube.addParam('type', 'video');
 youTube.addParam('order', 'relevance');
@@ -27,12 +27,14 @@ youTube.addParam('order', 'relevance');
 
 app.get('/',function(req,res){
   res.render('search');
+
 });
-// app.get('/results/',function(req,res){
-//
-// });
-app.get('/results/:word',function(req,res){
-  var word = req.params.word
+app.post('/',function(req,res){
+    word = req.body.searchbar;
+    res.redirect('/results/');
+});
+app.get('/results/',function(req,res){
+  console.log(word);
   youTube.search(word, limit, function(err, result){
       if (err){
         console.log(err);
