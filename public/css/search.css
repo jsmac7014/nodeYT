@@ -1,12 +1,10 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(./font.css);
 body{
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100vh;
   font-family: 'Noto Sans KR', sans-serif;
-  overflow-x: hidden; 
-  overflow-y: auto;
 }
 .container{
   padding: 0!important;
@@ -29,7 +27,6 @@ form{
 }
 .form-group .form-control.form-control-lg{
   width: 300px;
-
 }
 h1{
   font-size: 40px;

@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Search</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="css/results.css">
-  </head>
-  <body>
-    <div class="container">
-      <h1>result</h1>
-      <div class="output">
-        <ul>
-            <% for(var i in items){ %>
-                <li>
-                    <%=newdata['items'][i]['snippet']['title']%>
-                    <br/>
-                    <a href="<%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>">
-                      <%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>
-                    </a>
+<head>
+  <%include ./layout/head%>
+  <link rel="stylesheet" type="text/css" href="../css/results.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Result</h1>
+    <div class="outputs">
+        <% for(var i in items){ %>
+          <div class="output">
+            <span>title : <%=newdata['items'][i]['snippet']['title']%></span> 
+              <br/>
+              <!--<span>url : </span>
+              <a href="<%=" https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>">
+                <%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>
+              </a>-->
 
-                </li>
-            <% } %>
-        </ul>
-      </div>
+              <img src=<%=newdata[ 'items'][i][ 'snippet'][ 'thumbnails'][ 'medium'][ 'url']%> alt="">
+          </div>
+        <% } %>
+
     </div>
-  </body>
+  </div>
+</body>
 </html>
