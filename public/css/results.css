@@ -8,6 +8,7 @@ body {
 
 h1 {
   font-weight: 100!important;
+  margin: 10px;
 }
 
 .container {
@@ -60,4 +61,12 @@ h1 {
   flex: 2;
   position: relative;
   top: -20px;
+}
+.form-group{
+  display: flex;
+  flex-direction: row;
+}
+
+.search-form{
+  margin: 5px;
 }

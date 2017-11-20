@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // server
-var server = app.listen(3000, function(req,res){
+var server = app.listen(80, function(req,res){
     console.log("Express server has started on port 3000");
 });
 
@@ -22,12 +22,12 @@ youTube.setKey('AIzaSyC5bwEuaf6FmJQGeQps5daPrY_3yg8Y2dc');
 
 // youtube settings
 var word;
-var limit = 5;
+var limit = 50;
 youTube.addParam('type', 'video');
 youTube.addParam('order', 'relevance');
 youTube.addParam('videoCategoryId', '10');
 youTube.addParam('regionCode', 'KR');
-youTube.addParam('pageToken','CAoQAA');
+// youTube.addParam('pageToken','CAoQAA');
 // youTube.addParam('videoCaption','closedCaption');
 
 app.get('/',function(req,res){
@@ -42,15 +42,27 @@ app.post('/',function(req,res){
 });
 app.get('/results',function(req,res){
   res.redirect('/');
+
 });
 app.get('/results/:word',function(req,res){
-  word = req.params.word;
-  youTube.search(word, limit, function(err, result){
+  order = req.query.order
+  word = req.params.word;  
+  console.log('order: ' + req.query.order); 
+  if(order == "relevance" || order =="rating" || order =="date" ||order == "title" || order =="videocount" || order =="viewcount"){
+    youTube.addParam('order', order);
+    search();    
+  }
+  else{
+    youTube.addParam('order', 'relevance');
+    search();
+  }
+  function search(){
+    youTube.search(word, limit, function(err, result){
       if (err){
         console.log(err);
         return;
       }
-      console.log(JSON.stringify(result, null, 2));
+      // console.log(JSON.stringify(result, null, 2));
       newdata = result;
       items = result['items'];
       for (var i in items){
@@ -66,7 +78,19 @@ app.get('/results/:word',function(req,res){
       }
       res.render('results' , {
         'newdata' : newdata,
-        'title':'results',
+        title:'Results',
+        'word':word,
       });
     });
+  }
+
 });
+
+app.post('/results/:word',function(req,res){
+  word = req.body.searchbar;
+  res.redirect('/results/' + word);
+});
+
+// app.get('/results/:word/:order',function(req,res){
+
+// });

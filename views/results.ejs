@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <%include ./layout/head%>
-  <link rel="stylesheet" type="text/css" href="../css/results.css">
+    <link rel="stylesheet" type="text/css" href="../css/results.css">
 </head>
+
 <body>
   <div class="container">
     <h1>Result</h1>
+    <form method="post" class="search-form">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." name="searchbar">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <i class="material-icons">search</i>
+          </button>
+        </span>
+        <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseBtn" aria-expanded="false" aria-controls="collapseBtn">
+          <i class="material-icons">filter_list</i>
+        </button>
+      </div>
+    </form>
+
+    <div class="collapse" id="collapseBtn">
+      <div class="card card-body">
+        <form method="get" action="">
+          <button name="order" class="btn btn-primary" type="submit" value="relevance">Relevance</button>
+          <button name="order" class="btn btn-primary" type="submit" value="rating">Rating</button>
+          <button name="order" class="btn btn-primary" type="submit" value="date">Date</button>
+          <button name="order" class="btn btn-primary" type="submit" value="title">Title</button>
+          <button name="order" class="btn btn-primary" type="submit" value="videocount">videoCount</button>          
+          <button name="order" class="btn btn-primary" type="submit" value="viewcount">viewCount</button>                                        
+        </form>
+      </div>
+    </div>
     <div class="outputs">
-        <% for(var i in items){ %>
-          <div class="output">
-            <span>title : <%=newdata['items'][i]['snippet']['title']%></span> 
-              <br/>
-              <!--<span>url : </span>
-              <a href="<%=" https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>">
-                <%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>
-              </a>-->
+      <% for(var i in items){ %>
+        <div class="output">
+          <span>title :
+            <%=newdata['items'][i]['snippet']['title']%>
+          </span>
+          <br/>
+          
+          <!--<span>url :           
+            <a href="<%=" https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>">
+              <%="https://www.youtube.com/watch?v=" + newdata['items'][i]['id']['videoId']%>
+            </a>
+          </span>-->
 
-              <img src=<%=newdata[ 'items'][i][ 'snippet'][ 'thumbnails'][ 'medium'][ 'url']%> alt="">
-          </div>
+          <img src=<%=newdata[ 'items'][i][ 'snippet'][ 'thumbnails'][ 'medium'][ 'url']%> alt="">
+        </div>
         <% } %>
-
     </div>
   </div>
 </body>
+
 </html>
